@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import DenGiaoThong from './DenGiaoThong';
+// import Calcul from './Calcul'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
+    {/* <DenGiaoThong /> */}
+    {/* <Calcul /> */}
   </React.StrictMode>
 );
 

@@ -1,13 +1,77 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+*{
+  font-size: 22px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.gray{
+  background-color: #626364;
+}
+
+.orange{
+  background-color: #ff9f0a;
+}
+
+.light-gray{
+  background-color: #7c7a7a;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.App{
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  width: 236px;
+  text-align: center;
+  border: 1px solid #000;
+  background-color: #4f5050;
+  border-radius: 10px;
+}
+
+.dots{
+
+}
+
+.keypad{
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  grid-auto-rows: minmax(60px, auto);
+}
+
+input[type="text"] {
+  height: 75px;
+  width: 225px;
+  background-color: #4f5050;
+  border: 0px;
+  color: #ededed;
+  font-size: 30px;
+  
+}
+
+#zero{
+  grid-column: 1/3;
+  grid-row: 5;
+  border-radius: 0px 0px 0px 10px ;
+  border: 0.2px solid #4f5050;
+}
+
+#equal{
+  border-radius: 0px 0px 10px 0px ;
+  border: 0.2px solid #4f5050;
+}
+
+button{
+  color: #ededed;
+  border: 0.2px solid #4f5050;
+  cursor: pointer;
+}
+
+input:focus,
+input:active{
+  outline: none;
 }
