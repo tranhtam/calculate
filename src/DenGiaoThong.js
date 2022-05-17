@@ -10,6 +10,7 @@ const DenGiaoThong = () => {
   const [time, setTime] = useState('15')
   const [animation, setAnimation] = useState('go 3s linear infinite')
 
+
   useEffect(() => {
     const timeOutG = setTimeout(() => {
       if (color === 'green') {
@@ -86,7 +87,7 @@ const DenGiaoThong = () => {
   })
 
   return (
-    <div className='traffic'>
+    <div className='traffic' >
       <div className='traffic-lights'>
 
         <button

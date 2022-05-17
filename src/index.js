@@ -5,12 +5,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import DenGiaoThong from './DenGiaoThong';
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <App />
     {/* <DenGiaoThong /> */}
+
   </React.StrictMode>
 );
 

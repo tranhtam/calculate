@@ -7,6 +7,7 @@ function App() {
   const [iscalculate, setIsCalculate] = useState(false)
   const [isFirstRender, setIsFirstRender] = useState(true)
 
+
   const handleClick = (e) => {
     if (e.target.name !== '_' && isFirstRender) {
       setResult(result.replace('_', e.target.name))
@@ -83,6 +84,7 @@ function App() {
         <button name='.' onClick={handleCalculate} className='light-gray'>,</button>
         <button onClick={handleEqual} id='equal' className='orange'>=</button>
       </div>
+      {/* <button></button> */}
     </div>
   );
 }
