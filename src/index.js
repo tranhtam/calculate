@@ -9,8 +9,8 @@ import DenGiaoThong from './DenGiaoThong';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    {/* <App /> */}
-    <DenGiaoThong />
+    <App />
+    {/* <DenGiaoThong /> */}
   </React.StrictMode>
 );
 
