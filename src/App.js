@@ -4,9 +4,10 @@ import './App.css';
 function App() {
 
   const [result, setResult] = useState('_')
-  const [iscalculate, setIsCalculate] = useState(false)
+  const [isCalculate, setIsCalculate] = useState(false)
   const [isFirstRender, setIsFirstRender] = useState(true)
-
+  const [isLunisolar, setIsLunisolar] = useState(true)
+  const [isDot, setIsDot] = useState(true)
 
   const handleClick = (e) => {
     if (e.target.name !== '_' && isFirstRender) {
@@ -21,34 +22,47 @@ function App() {
   }
 
   const handleCalculate = (e) => {
-    if (iscalculate) {
+    if (isCalculate) {
       setResult(result.concat(e.target.name))
       setIsCalculate(false)
+      setIsDot(true)
     }
+    // else {
+    //   setResult(result.replace('-', e.target.name))
+    //   setIsCalculate(false)
+    //   setIsDot(true)
+    // }
   }
 
   const handleClear = () => {
     setResult('_')
     setIsCalculate(false)
     setIsFirstRender(true)
+    setIsLunisolar(true)
+    setIsDot(true)
   }
 
   const handleEqual = (e) => {
-    setResult(eval(result))
+    setResult(eval(result).toString())
   }
 
-  const handleAm = (e) => {
-    // setResult('-' + result.concat(e.target.name))
-
-    if (result.substr(-1) === '+'
-      || result.substr(-1) === '*'
-      || result.substr(-1) === '/') {
-      setResult(result.concat(e.target.name) + '-')
-    } else {
+  const handleLunisolar = (e) => {
+    if (isLunisolar) {
       setResult('-' + result.concat(e.target.name))
-
+      setIsLunisolar(false)
+    } else {
+      setResult(result.replace('-', e.target.name))
+      setIsLunisolar(true)
     }
   }
+
+  const handleDot = (e) => {
+    if (isDot) {
+      setResult(result.concat(e.target.name) + '.')
+      setIsDot(false)
+    }
+  }
+
 
 
   return (
@@ -65,7 +79,7 @@ function App() {
 
       <div className='keypad'>
         <button onClick={handleClear} className='gray'>AC</button>
-        <button onClick={handleAm} className='gray'>+/-</button>
+        <button onClick={handleLunisolar} className='gray'>+/-</button>
         <button name='%' onClick={handleCalculate} className='gray'>%</button>
         <button name='/' onClick={handleCalculate} className='orange'>&#247;</button>
         <button name="7" onClick={handleClick} className='light-gray'>7</button>
@@ -81,7 +95,7 @@ function App() {
         <button name='3' onClick={handleClick} className='light-gray'>3</button>
         <button name='+' onClick={handleCalculate} className='orange'>&#43;</button>
         <button name='0' onClick={handleClick} id='zero' className='light-gray'>0</button>
-        <button name='.' onClick={handleCalculate} className='light-gray'>,</button>
+        <button onClick={handleDot} className='light-gray'>,</button>
         <button onClick={handleEqual} id='equal' className='orange'>=</button>
       </div>
       {/* <button></button> */}
