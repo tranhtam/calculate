@@ -8,19 +8,19 @@ function App() {
   const [isFirstRender, setIsFirstRender] = useState(true)
   const [isLunisolar, setIsLunisolar] = useState(true)
   const [isDot, setIsDot] = useState(true)
-
+  const [isPercent, setIsPercent] = useState(false)
 
   const handleClick = (e) => {
     if (e.target.name !== '_' && isFirstRender) {
       setResult(result.replace('_', e.target.name))
       setIsCalculate(true)
       setIsFirstRender(false)
-
+      setIsPercent(true)
     } else {
       setResult(result.concat(e.target.name))
       setIsCalculate(true)
       setIsFirstRender(false)
-
+      setIsPercent(true)
     }
   }
 
@@ -44,11 +44,13 @@ function App() {
     setIsFirstRender(true)
     setIsLunisolar(true)
     setIsDot(true)
-
+    setIsPercent(false)
   }
 
   const handleEqualPercent = () => {
-    setResult(eval(result / '100').toString())
+    if (isPercent) {
+      setResult(eval(result / '100').toString())
+    }
   }
 
   const handleEqual = (e) => {
