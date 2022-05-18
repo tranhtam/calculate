@@ -8,19 +8,19 @@ function App() {
   const [isFirstRender, setIsFirstRender] = useState(true)
   const [isLunisolar, setIsLunisolar] = useState(true)
   const [isDot, setIsDot] = useState(true)
-  const [isPercent, setIsPercent] = useState(false)
+
 
   const handleClick = (e) => {
     if (e.target.name !== '_' && isFirstRender) {
       setResult(result.replace('_', e.target.name))
       setIsCalculate(true)
       setIsFirstRender(false)
-      setIsPercent(true)
+
     } else {
       setResult(result.concat(e.target.name))
       setIsCalculate(true)
       setIsFirstRender(false)
-      setIsPercent(true)
+
     }
   }
 
@@ -29,7 +29,7 @@ function App() {
       setResult(result.concat(e.target.name))
       setIsCalculate(false)
       setIsDot(true)
-      setIsPercent(false)
+
     }
     // else {
     //   setResult(result.replace('-', e.target.name))
@@ -44,19 +44,16 @@ function App() {
     setIsFirstRender(true)
     setIsLunisolar(true)
     setIsDot(true)
-    setIsPercent(false)
+
+  }
+
+  const handleEqualPercent = () => {
+    setResult(eval(result / '100').toString())
   }
 
   const handleEqual = (e) => {
-    if (isPercent) {
-      setResult(eval(result).toString())
-      setIsDot(false)
-      setIsPercent(false)
-    } else {
-      setResult(eval(result / '100').toString())
-      setIsDot(false)
-      setIsPercent(false)
-    }
+    setResult(eval(result).toString())
+    setIsDot(false)
   }
 
   const handleLunisolar = (e) => {
@@ -93,7 +90,7 @@ function App() {
       <div className='keypad'>
         <button onClick={handleClear} className='gray'>AC</button>
         <button onClick={handleLunisolar} className='gray'>+/-</button>
-        <button onClick={handleCalculate} className='gray'>%</button>
+        <button onClick={handleEqualPercent} className='gray'>%</button>
         <button name='/' onClick={handleCalculate} className='orange'>&#247;</button>
         <button name="7" onClick={handleClick} className='light-gray'>7</button>
         <button name='8' onClick={handleClick} className='light-gray'>8</button>
