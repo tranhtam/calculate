@@ -3,8 +3,8 @@ import './App.css';
 
 function App() {
 
-  const [result, setResult] = useState('0')
-  const [fakeResult, setFakeResult] = useState('0')
+  const [result, setResult] = useState('_')
+  const [fakeResult, setFakeResult] = useState('_')
   const [isCalculate, setIsCalculate] = useState(false)
   const [isFirstRender, setIsFirstRender] = useState(true)
   const [isLunisolar, setIsLunisolar] = useState(true)
@@ -27,9 +27,9 @@ function App() {
     //   // setFakeResult(result.replace(result, e.target.name))
     // }
 
-    if (e.target.name !== '0' && isFirstRender) {
-      setResult(result.replace('0', e.target.name))
-      setFakeResult(result.replace('0', e.target.name))
+    if (e.target.name !== '_' && isFirstRender) {
+      setResult(result.replace('_', e.target.name))
+      setFakeResult(result.replace('_', e.target.name))
       setIsCalculate(true)
       setIsFirstRender(false)
       setIsPercent(true)
@@ -42,6 +42,7 @@ function App() {
       setIsCalculate(true)
       setIsFirstRender(false)
       setIsPercent(true)
+      setIsDot(true)
     } else {
       setResult(result.concat(e.target.name))
       setFakeResult(fakeResult.concat(e.target.name))
@@ -55,19 +56,35 @@ function App() {
     if (isCalculate) {
       setResult(result.concat(e.target.name))
       setIsCalculate(false)
+      setIsDot(false)
+      setIsPercent(false)
+    }
+    else if (result.substr(-1) === '-') {
+      setResult(result.replace('-', e.target.name))
+      setIsCalculate(false)
+      setIsDot(true)
+      setIsPercent(false)
+    } else if (result.substr(-1) === '+') {
+      setResult(result.replace('+', e.target.name))
+      setIsCalculate(false)
+      setIsDot(true)
+      setIsPercent(false)
+    } else if (result.substr(-1) === '*') {
+      setResult(result.replace('*', e.target.name))
+      setIsCalculate(false)
+      setIsDot(true)
+      setIsPercent(false)
+    } else {
+      setResult(result.replace('/', e.target.name))
+      setIsCalculate(false)
       setIsDot(true)
       setIsPercent(false)
     }
-    // else {
-    //   setResult(result.replace('-', e.target.name))
-    //   setIsCalculate(false)
-    //   setIsDot(true)
-    // }
   }
 
   const handleClear = () => {
-    setResult('0')
-    setFakeResult('0')
+    setResult('_')
+    setFakeResult('_')
     setIsCalculate(false)
     setIsFirstRender(true)
     setIsLunisolar(true)
@@ -79,6 +96,7 @@ function App() {
     if (isPercent) {
       setResult(eval(result / '100').toString())
       setFakeResult(eval(result / '100').toString())
+      setIsDot(false)
     }
   }
 
