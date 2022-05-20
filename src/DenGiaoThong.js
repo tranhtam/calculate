@@ -47,7 +47,7 @@ const DenGiaoThong = () => {
       if (color === 'yellow') {
         setColor('red')
         setMess('STOP!')
-        setAnimation('stop 0s linear infinite')
+        setAnimation('stop 1s linear infinite 10s')
         setTimeR('10')
         setTime('10')
       }
@@ -110,10 +110,9 @@ const DenGiaoThong = () => {
       <div id="loop" class="center"></div>
       <div id="bike-wrapper" class="center">
         <div id="bike" class="centerBike"
-          style={{ animation: animation }}
-        ></div>
+          style={{ animation: animation }}>
+        </div>
       </div>
-
     </div>
   )
 }

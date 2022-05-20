@@ -38,7 +38,7 @@ function App() {
       || result.substr(-1) === '/'
       || result.substr(-1) === '*') {
       setFakeResult(result.replace(result, e.target.name))
-      setResult(result.concat(e.target.name))
+      setResult(result.concat(e.target.name).replace(',', '.'))
       setIsCalculate(true)
       setIsFirstRender(false)
       setIsPercent(true)
@@ -94,15 +94,15 @@ function App() {
 
   const handleEqualPercent = () => {
     if (isPercent) {
-      setResult(eval(result / '100').toString())
-      setFakeResult(eval(result / '100').toString())
+      setResult(eval(result / '100').toLocaleString().replace('.', ','))
+      setFakeResult(eval(result / '100').toLocaleString().replace('.', ','))
       setIsDot(false)
     }
   }
 
   const handleEqual = (e) => {
-    setResult(eval(result).toString())
-    setFakeResult(eval(result).toString())
+    parseFloat(setResult(eval(result).toString().replace('.', ',')))
+    parseFloat(setFakeResult(eval(result).toString().replace('.', ',')))
     setIsPercent(false)
     setIsDot(false)
   }
@@ -120,9 +120,18 @@ function App() {
   }
 
   const handleDot = (e) => {
+    // if (isDot && result.substr(-1) !== '.') {
+    //   setResult(result.concat(e.target.name) + '.')
+    //   setFakeResult(fakeResult.concat(e.target.name) + '.')
+    //   setIsDot(false)
+    // } else {
+    //   setResult(result.replace('.', ','))
+    //   setFakeResult(fakeResult.replace('.', ','))
+    //   setIsDot(false)
+    // }
     if (isDot) {
-      setResult(result.concat(e.target.name) + '.')
-      setFakeResult(fakeResult.concat(e.target.name) + '.')
+      parseFloat(setResult(result.concat(e.target.name.toString()) + '.'))
+      parseFloat(setFakeResult(fakeResult.concat(e.target.name.toString()) + ','))
       setIsDot(false)
     }
   }

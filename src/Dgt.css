@@ -57,7 +57,7 @@
 }
 
 body{
-background: black;
+/* background: black; */
 overflow: hidden;
 }
 
@@ -65,8 +65,8 @@ overflow: hidden;
 position: absolute;
 top: 50%;
 left: 50%;
-margin-top: 24px;
-margin-left: -12px;
+margin-top: 9px;
+margin-left: -31px;
 }
 
 .center {
@@ -77,12 +77,12 @@ margin-top: -50px;
 margin-left: -50px;
 }
 
-#loop {
+/* #loop {
 height: 100px;
 width: 100px;
 border: #bb5f27 solid 4px;
 border-radius: 200px;
-}
+} */
 
 #loop:before {
 background: linear-gradient(to left, rgba(187, 95, 39, 0) 0%, rgba(187, 95, 39, 1) 30%, rgba(187, 95, 39, 1) 70%, rgba(187, 95, 39, 0) 100%);
@@ -102,24 +102,27 @@ width: 108px;
 }
 
 #bike {
-height: 24px;
-width: 25px;
-background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133687/motorbike.png");
+/* height: 24px;
+width: 25px; */
+height: 37px;
+width: 50px;
+background-size: 50px;
+background-image: url("./img/motor-bike.png");
 }
 
 @keyframes go {
-0% {
-  margin-left: -500px;
-  opacity: 0;
-}
-49.99% {
-  margin-left: 0px;
-  opacity: 1;
-}
-100% {
-  margin-left: 500px;
-  opacity: 0;
-}
+    0% {
+        margin-left: -500px;
+        opacity: 0;
+    }
+    49.99% {
+        margin-left: 0px;
+        opacity: 1;
+    }
+    100% {
+        margin-left: 500px;
+        opacity: 0;
+    }
 }
 
 @keyframes wait {
@@ -131,18 +134,7 @@ background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133687/motor
         margin-left: 0px;
         opacity: 1;
     }
-    100% {
-        margin-left: 500px;
-        opacity: 0;
-    }
-}
-
-@keyframes stop {
-    0% {
-        margin-left: -500px;
-        opacity: 0;
-    }
-    49.99% {
+    50.99% {
         margin-left: 0px;
         opacity: 1;
     }
@@ -151,3 +143,29 @@ background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/133687/motor
         opacity: 0;
     }
 }
+
+@keyframes stop {
+    0% {
+        margin-left: 0px;
+        opacity: 1;
+    }
+    /* 49.99% {
+        margin-left: 0px;
+        opacity: 1;
+    } */
+    100% {
+        margin-left: 500px;
+        opacity: 0;
+    }
+}
+
+/* @keyframes go2 {
+    0% {
+        margin-left: 0px;
+        opacity: 1;
+    }
+    100% {
+        margin-left: 500px;
+        opacity: 0;
+    }
+} */
