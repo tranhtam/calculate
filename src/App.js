@@ -28,9 +28,32 @@ function App() {
       setIsCalculate(true)
       setIsFirstRender(false)
       setIsPercent(true)
-      setIsDot(true)
     } else if (result.substr(0) === '0') {
       setResult(result.replace('0', e.target.name))
+      setFakeResult(fakeResult.replace('0', e.target.name))
+      setIsCalculate(true)
+      setIsFirstRender(false)
+      setIsPercent(true)
+    } else if (result.substr(-2, 2) === '+0') {
+      setResult(result.replace('+0', '+').concat(e.target.name).toString())
+      setFakeResult(fakeResult.replace('0', e.target.name))
+      setIsCalculate(true)
+      setIsFirstRender(false)
+      setIsPercent(true)
+    } else if (result.substr(-2, 2) === '-0') {
+      setResult(result.replace('-0', '-').concat(e.target.name).toString())
+      setFakeResult(fakeResult.replace('0', e.target.name))
+      setIsCalculate(true)
+      setIsFirstRender(false)
+      setIsPercent(true)
+    } else if (result.substr(-2, 2) === '*0') {
+      setResult(result.replace('*0', '*').concat(e.target.name).toString())
+      setFakeResult(fakeResult.replace('0', e.target.name))
+      setIsCalculate(true)
+      setIsFirstRender(false)
+      setIsPercent(true)
+    } else if (result.substr(-2, 2) === '/0') {
+      setResult(result.replace('/0', '/').concat(e.target.name).toString())
       setFakeResult(fakeResult.replace('0', e.target.name))
       setIsCalculate(true)
       setIsFirstRender(false)
@@ -48,28 +71,28 @@ function App() {
     if (isCalculate) {
       setResult(result.concat(e.target.name))
       setIsCalculate(false)
-      setIsDot(false)
+      setIsDot(true)
       setIsPercent(false)
     }
     else if (result.substr(-1) === '-') {
       setResult(result.replace('-', e.target.name))
       setIsCalculate(false)
-      setIsDot(false)
+      setIsDot(true)
       setIsPercent(false)
     } else if (result.substr(-1) === '+') {
       setResult(result.replace('+', e.target.name))
       setIsCalculate(false)
-      setIsDot(false)
+      setIsDot(true)
       setIsPercent(false)
     } else if (result.substr(-1) === '*') {
       setResult(result.replace('*', e.target.name))
       setIsCalculate(false)
-      setIsDot(false)
+      setIsDot(true)
       setIsPercent(false)
     } else {
       setResult(result.replace('/', e.target.name))
       setIsCalculate(false)
-      setIsDot(false)
+      setIsDot(true)
       setIsPercent(false)
     }
   }
@@ -95,7 +118,7 @@ function App() {
   }
 
   const handleEqual = (e) => {
-    parseFloat(setResult(eval(result).toString().replace('.', ',')))
+    parseFloat(setResult(eval(result).toString().replace('.', ',').replace(',', '.')))
     parseFloat(setFakeResult(eval(result).toString().replace('.', ',')))
     // parseFloat(setResult(eval(result).toLocaleString('vi-VN').replace('.', ',')))
     // parseFloat(setFakeResult(eval(result).toLocaleString('vi-VN').replace('.', ',')))
@@ -116,18 +139,12 @@ function App() {
   }
 
   const handleDot = (e) => {
-    // if (isDot && result.substr(-1) !== '.') {
-    //   setResult(result.concat(e.target.name) + '.')
-    //   setFakeResult(fakeResult.concat(e.target.name) + '.')
-    //   setIsDot(false)
-    // } else {
-    //   setResult(result.replace('.', ','))
-    //   setFakeResult(fakeResult.replace('.', ','))
-    //   setIsDot(false)
-    // }
     if (isDot) {
-      parseFloat(setResult(result.concat(e.target.name.toString()).replace(',', '.').replace('_', '0')))
-      parseFloat(setFakeResult(fakeResult.concat(e.target.name.toString()).replace('_', '0')))
+      setResult(result.concat(e.target.name.toString()).replace(',', '.').replace('_', '0'))
+      setFakeResult(fakeResult.concat(e.target.name.toString()).replace('_', '0'))
+      if (result.substr(-1) === '+' || result.substr(-1) === '-' || result.substr(-1) === '*' || result.substr(-1) === '/') {
+        setFakeResult(result.concat(e.target.name.toString()).replace(result, '0'))
+      }
       setIsDot(false)
       setIsFirstRender(false)
     }
