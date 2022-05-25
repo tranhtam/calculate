@@ -25,7 +25,6 @@ function App() {
       || result.substr(-1) === '*') {
       setFakeResult(result.replace(result, e.target.name))
       setResult(result.concat(e.target.name).replace(',', '.'))
-      // setResult(result.concat(e.target.name).replace('.', '').replace('.', '').replace('.', '').replace('.', '').replace(',', '.'))
       setIsCalculate(true)
       setIsFirstRender(false)
       setIsPercent(true)
@@ -55,22 +54,22 @@ function App() {
     else if (result.substr(-1) === '-') {
       setResult(result.replace('-', e.target.name))
       setIsCalculate(false)
-      setIsDot(true)
+      setIsDot(false)
       setIsPercent(false)
     } else if (result.substr(-1) === '+') {
       setResult(result.replace('+', e.target.name))
       setIsCalculate(false)
-      setIsDot(true)
+      setIsDot(false)
       setIsPercent(false)
     } else if (result.substr(-1) === '*') {
       setResult(result.replace('*', e.target.name))
       setIsCalculate(false)
-      setIsDot(true)
+      setIsDot(false)
       setIsPercent(false)
     } else {
       setResult(result.replace('/', e.target.name))
       setIsCalculate(false)
-      setIsDot(true)
+      setIsDot(false)
       setIsPercent(false)
     }
   }
@@ -127,9 +126,10 @@ function App() {
     //   setIsDot(false)
     // }
     if (isDot) {
-      parseFloat(setResult(result.concat(e.target.name.toString()) + '.'))
-      parseFloat(setFakeResult(fakeResult.concat(e.target.name.toString()) + ','))
+      parseFloat(setResult(result.concat(e.target.name.toString()).replace(',', '.').replace('_', '0')))
+      parseFloat(setFakeResult(fakeResult.concat(e.target.name.toString()).replace('_', '0')))
       setIsDot(false)
+      setIsFirstRender(false)
     }
   }
 
@@ -167,7 +167,7 @@ function App() {
         <button name='3' onClick={handleClick} className='light-gray'>3</button>
         <button name='+' onClick={handleCalculate} className='orange'>&#43;</button>
         <button name='0' onClick={handleClick} id='zero' className='light-gray'>0</button>
-        <button onClick={handleDot} className='light-gray'>,</button>
+        <button name=',' onClick={handleDot} className='light-gray'>,</button>
         <button onClick={handleEqual} id='equal' className='orange'>=</button>
       </div>
     </div>
