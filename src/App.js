@@ -11,14 +11,38 @@ function App() {
   const [isDot, setIsDot] = useState(true)
   const [isPercent, setIsPercent] = useState(false)
 
+  const replaceLined = (e, startString, hasConcat, replaceString, isZero) => {
+    if (hasConcat && replaceString) {
+      setResult(result.replace(startString, replaceString).concat(e.target.name).toString())
+      setFakeResult(fakeResult.replace(isZero ? '0' : startString, e.target.name))
+    } else {
+      setResult(result.replace(startString, e.target.name))
+      setFakeResult(result.replace(startString, e.target.name))
+    }
+    setIsCalculate(true)
+    setIsFirstRender(false)
+    setIsPercent(true)
+  }
+
+  const actionCalculate = (e, startCalculate, replaceIsCalculate) => {
+    if (replaceIsCalculate) {
+      setResult(result.replace(startCalculate, e.target.name))
+    } else {
+      setResult(result.concat(e.target.name))
+    }
+    setIsCalculate(false)
+    setIsDot(true)
+    setIsPercent(false)
+  }
 
   const handleClick = (e) => {
     if (e.target.name !== '_' && isFirstRender) {
-      setResult(result.replace('_', e.target.name))
-      setFakeResult(result.replace('_', e.target.name))
-      setIsCalculate(true)
-      setIsFirstRender(false)
-      setIsPercent(true)
+      // setResult(result.replace('_', e.target.name))
+      // setFakeResult(result.replace('_', e.target.name))
+      // setIsCalculate(true)
+      // setIsFirstRender(false)
+      // setIsPercent(true)
+      replaceLined(e, '_')
     } else if (result.substr(-1) === '-'
       || result.substr(-1) === '+'
       || result.substr(-1) === '/'
@@ -29,35 +53,40 @@ function App() {
       setIsFirstRender(false)
       setIsPercent(true)
     } else if (result.substr(0) === '0') {
-      setResult(result.replace('0', e.target.name))
-      setFakeResult(fakeResult.replace('0', e.target.name))
-      setIsCalculate(true)
-      setIsFirstRender(false)
-      setIsPercent(true)
+      // setResult(result.replace('0', e.target.name))
+      // setFakeResult(fakeResult.replace('0', e.target.name))
+      // setIsCalculate(true)
+      // setIsFirstRender(false)
+      // setIsPercent(true)
+      replaceLined(e, '0')
     } else if (result.substr(-2, 2) === '+0') {
-      setResult(result.replace('+0', '+').concat(e.target.name).toString())
-      setFakeResult(fakeResult.replace('0', e.target.name))
-      setIsCalculate(true)
-      setIsFirstRender(false)
-      setIsPercent(true)
+      // setResult(result.replace('+0', '+').concat(e.target.name).toString())
+      // setFakeResult(fakeResult.replace('0', e.target.name))
+      // setIsCalculate(true)
+      // setIsFirstRender(false)
+      // setIsPercent(true)
+      replaceLined(e, '+0', true, '+', true)
     } else if (result.substr(-2, 2) === '-0') {
-      setResult(result.replace('-0', '-').concat(e.target.name).toString())
-      setFakeResult(fakeResult.replace('0', e.target.name))
-      setIsCalculate(true)
-      setIsFirstRender(false)
-      setIsPercent(true)
+      // setResult(result.replace('-0', '-').concat(e.target.name).toString())
+      // setFakeResult(fakeResult.replace('0', e.target.name))
+      // setIsCalculate(true)
+      // setIsFirstRender(false)
+      // setIsPercent(true)
+      replaceLined(e, '-0', true, '-', true)
     } else if (result.substr(-2, 2) === '*0') {
-      setResult(result.replace('*0', '*').concat(e.target.name).toString())
-      setFakeResult(fakeResult.replace('0', e.target.name))
-      setIsCalculate(true)
-      setIsFirstRender(false)
-      setIsPercent(true)
+      // setResult(result.replace('*0', '*').concat(e.target.name).toString())
+      // setFakeResult(fakeResult.replace('0', e.target.name))
+      // setIsCalculate(true)
+      // setIsFirstRender(false)
+      // setIsPercent(true)
+      replaceLined(e, '*0', true, '*', true)
     } else if (result.substr(-2, 2) === '/0') {
-      setResult(result.replace('/0', '/').concat(e.target.name).toString())
-      setFakeResult(fakeResult.replace('0', e.target.name))
-      setIsCalculate(true)
-      setIsFirstRender(false)
-      setIsPercent(true)
+      // setResult(result.replace('/0', '/').concat(e.target.name).toString())
+      // setFakeResult(fakeResult.replace('0', e.target.name))
+      // setIsCalculate(true)
+      // setIsFirstRender(false)
+      // setIsPercent(true)
+      replaceLined(e, '/0', true, '/', true)
     } else {
       setResult(result.concat(e.target.name))
       setFakeResult(fakeResult.concat(e.target.name))
@@ -69,31 +98,36 @@ function App() {
 
   const handleCalculate = (e) => {
     if (isCalculate) {
-      setResult(result.concat(e.target.name))
-      setIsCalculate(false)
-      setIsDot(true)
-      setIsPercent(false)
+      // setResult(result.concat(e.target.name))
+      // setIsCalculate(false)
+      // setIsDot(true)
+      // setIsPercent(false)
+      actionCalculate(e)
     }
     else if (result.substr(-1) === '-') {
-      setResult(result.replace('-', e.target.name))
-      setIsCalculate(false)
-      setIsDot(true)
-      setIsPercent(false)
+      // setResult(result.replace('-', e.target.name))
+      // setIsCalculate(false)
+      // setIsDot(true)
+      // setIsPercent(false)
+      actionCalculate(e, '-', true)
     } else if (result.substr(-1) === '+') {
-      setResult(result.replace('+', e.target.name))
-      setIsCalculate(false)
-      setIsDot(true)
-      setIsPercent(false)
+      // setResult(result.replace('+', e.target.name))
+      // setIsCalculate(false)
+      // setIsDot(true)
+      // setIsPercent(false)
+      actionCalculate(e, '+', true)
     } else if (result.substr(-1) === '*') {
-      setResult(result.replace('*', e.target.name))
-      setIsCalculate(false)
-      setIsDot(true)
-      setIsPercent(false)
+      // setResult(result.replace('*', e.target.name))
+      // setIsCalculate(false)
+      // setIsDot(true)
+      // setIsPercent(false)
+      actionCalculate(e, '*', true)
     } else {
-      setResult(result.replace('/', e.target.name))
-      setIsCalculate(false)
-      setIsDot(true)
-      setIsPercent(false)
+      // setResult(result.replace('/', e.target.name))
+      // setIsCalculate(false)
+      // setIsDot(true)
+      // setIsPercent(false)
+      actionCalculate(e, '/', true)
     }
   }
 
@@ -111,8 +145,6 @@ function App() {
     if (isPercent) {
       setResult(eval(result / '100').toString().replace('.', ',').replace(',', '.'))
       setFakeResult(eval(result / '100').toString().replace('.', ','))
-      // setResult(eval(result / '100').toString())
-      // setFakeResult(eval(result / '100').toString())
       setIsDot(false)
     }
   }
@@ -120,8 +152,6 @@ function App() {
   const handleEqual = (e) => {
     parseFloat(setResult(eval(result).toString().replace('.', ',').replace(',', '.')))
     parseFloat(setFakeResult(eval(result).toString().replace('.', ',')))
-    // parseFloat(setResult(eval(result).toLocaleString('vi-VN').replace('.', ',')))
-    // parseFloat(setFakeResult(eval(result).toLocaleString('vi-VN').replace('.', ',')))
     setIsPercent(false)
     setIsDot(false)
   }
